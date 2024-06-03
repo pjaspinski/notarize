@@ -81,7 +81,10 @@ export async function notarizeAndWaitForNotaryTool(opts: NotaryToolStartOptions)
       'json',
     ];
 
-    const result = await spawn('/Applications/Xcode.app/Contents/Developer/usr/bin/notarytool', notarizeArgs);
+    const result = await spawn(
+      '/Applications/Xcode.app/Contents/Developer/usr/bin/notarytool',
+      notarizeArgs,
+    );
     const rawOut = result.output.trim();
 
     let parsed: any;
@@ -97,6 +100,8 @@ export async function notarizeAndWaitForNotaryTool(opts: NotaryToolStartOptions)
       d('notarization success');
       return;
     }
+
+    console.log(result, parsed);
 
     let logOutput: undefined | string;
     if (parsed.id) {
