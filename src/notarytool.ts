@@ -73,7 +73,6 @@ export async function notarizeAndWaitForNotaryTool(opts: NotaryToolStartOptions)
     }
 
     const notarizeArgs = [
-      'notarytool',
       'submit',
       filePath,
       ...authorizationArgs(opts),
@@ -82,7 +81,7 @@ export async function notarizeAndWaitForNotaryTool(opts: NotaryToolStartOptions)
       'json',
     ];
 
-    const result = await spawn('xcrun', notarizeArgs);
+    const result = await spawn('/Applications/Xcode.app/Contents/Developer/usr/bin/notarytool', notarizeArgs);
     const rawOut = result.output.trim();
 
     let parsed: any;
