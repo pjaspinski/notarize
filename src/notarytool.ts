@@ -101,8 +101,6 @@ export async function notarizeAndWaitForNotaryTool(opts: NotaryToolStartOptions)
       return;
     }
 
-    console.log(result, parsed);
-
     let logOutput: undefined | string;
     if (parsed.id) {
       try {
@@ -119,7 +117,9 @@ export async function notarizeAndWaitForNotaryTool(opts: NotaryToolStartOptions)
       }
     }
 
-    let message = `Failed to notarize via notarytool\n\n${result.output}`;
+    let message = `Failed to notarize via notarytool\n\n${result.output} ${JSON.stringify(
+      result,
+    )} ${JSON.stringify(parsed)}`;
     if (logOutput) {
       message += `\n\nDiagnostics from notarytool log: ${logOutput}`;
     }
